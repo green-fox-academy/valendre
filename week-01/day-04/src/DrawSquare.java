@@ -12,12 +12,9 @@ public class DrawSquare {
                 } else {
                     b+=" ";
                 }
-
             }
-
             System.out.println(b);
             b="";
-
         }
     }
 }

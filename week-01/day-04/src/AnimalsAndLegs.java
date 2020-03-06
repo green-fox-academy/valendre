@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class AnimalsAndLegs {
     public static void main(String[] args) {
+
         System.out.println("the number of chickens the farmer has:");
         Scanner scanner = new Scanner(System.in);
         int chicken = scanner.nextInt();

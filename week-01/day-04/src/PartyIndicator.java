@@ -17,6 +17,5 @@ public class PartyIndicator {
         if (g==0) {
             System.out.println("Sausage party");
         }
-
     }
 }

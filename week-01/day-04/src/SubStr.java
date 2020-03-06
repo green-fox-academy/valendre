@@ -20,9 +20,6 @@ public class SubStr {
         System.out.println("What are you searching for?");
         String q = s.nextLine();
         System.out.println(subStr(input, q));
-
-
-
     }
 
     public static int subStr(String input, String q) {

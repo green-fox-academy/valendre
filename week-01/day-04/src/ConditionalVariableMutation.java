@@ -41,7 +41,7 @@ public class ConditionalVariableMutation {
             // if credits are smaller than 50,
             // and isBonus is false decrement c by 1
             // if isBonus is true c should remain the same
-            if (isBonus == false) {
+            if (!isBonus) {
                 if (credits >= 50) {
                     c -= 2;
                 } else {

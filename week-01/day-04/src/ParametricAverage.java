@@ -20,12 +20,8 @@ public class ParametricAverage {
             for (int i = 1; i <= n ; i++) {
                 System.out.println("Type " + i +". number:");
                 a+=s.nextInt();
-
             }
-
             System.out.println("Sum: " + a + ", Avarage: " + (float)a/n);
         }
-
-
     }
 }
