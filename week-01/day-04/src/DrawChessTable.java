@@ -9,10 +9,9 @@ public class DrawChessTable {
                 } else {
                     a+=" ";
                 }
-                System.out.println(a);
-
 
             }
+            System.out.println(a);
 
         }
     }

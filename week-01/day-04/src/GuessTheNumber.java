@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class GuessTheNumber {
     public static void main(String[] args) {
 
-        int a = 8;
+        int a = 23;
 
         Scanner s = new Scanner(System.in);
         System.out.println("Guess the number!");
