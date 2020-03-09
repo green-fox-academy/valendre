@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Colors {
   // - Create a two dimensional array
   //   which can contain the different shades of specified colors
@@ -12,5 +14,11 @@ public class Colors {
         {"lime", "forest green", "olive", "pale green", "spring green"},
         {"orange red", "red", "tomato"},
         {"orchid", "violet", "pink", "hot pink"}};
+    for (int i = 0; i < colors.length; i++) {
+      System.out.println(Arrays.toString(colors[i]));
+
+    }
+
+    }
   }
-}
+
