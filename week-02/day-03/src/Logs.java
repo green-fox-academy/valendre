@@ -15,9 +15,13 @@ public class Logs {
     try {
       Path path = Paths.get("log.txt");
       List<String> messages = Files.readAllLines(path);
-      uniqueIPfunction(messages);
-      getPostRatio(messages);
-
+      System.out.println("unique IP adresses");
+      String[] uniqueIpArray = uniqueIPfunction(messages.toArray(new String[0]));
+      System.out.println(Arrays.toString(uniqueIpArray));
+      float ratio = getPostRatio(messages.toArray(new String[0]));
+      float getPercentage = ratio / (1 + ratio) * 100;
+      float postPercentage = 1 / (1 + ratio) * 100;
+      System.out.println("the GET " + getPercentage + "% / POST request " + postPercentage + "%, ratio " + ratio);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -26,14 +30,11 @@ public class Logs {
   public static String[] uniqueIPfunction(String... args) {
     List<String> messages = new ArrayList<>();
     for (String message : args) {
-      messages.add(message)
+      messages.add(message);
     }
     List<String> uniqueIP = new ArrayList<>();
     for (String message : messages) {
-      System.out.println(message);
       String[] pieces = message.split(" ");
-      System.out.println(Arrays.toString(pieces));
-
       if (uniqueIP.contains(pieces[8])) {
       } else {
         uniqueIP.add(pieces[8]);
@@ -42,28 +43,25 @@ public class Logs {
     String[] arrayToReturn = new String[uniqueIP.size()];
     arrayToReturn = uniqueIP.toArray(arrayToReturn);
     return arrayToReturn;
-
   }
 
   public static float getPostRatio(String... args) {
     List<String> messages = new ArrayList<>();
     for (String message : args) {
-      messages.add(message)
+      messages.add(message);
     }
     int numberOfGet = 0;
     int numberOfPost = 0;
     float ratio;
     for (String message : messages) {
-      System.out.println(message);
       String[] pieces = message.split(" ");
-      System.out.println(Arrays.toString(pieces));
       if (pieces[11].equals("GET")) {
         numberOfGet++;
       } else if (pieces[11].equals("POST")) {
         numberOfPost++;
       }
     }
-    ratio = numberOfGet / numberOfPost;
+    ratio = (float) numberOfGet / (float) numberOfPost;
     return ratio;
   }
 }
