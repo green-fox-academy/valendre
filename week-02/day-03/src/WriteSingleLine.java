@@ -20,8 +20,8 @@ public class WriteSingleLine {
   public static void fileManipulator (String name) {
     try {
       Path myFilePath = Paths.get("my-file.txt");
-      List<String> toWrite = Arrays.asList(name);
-      Files.write(myFilePath, toWrite);
+      //List<String> toWrite = Arrays.asList(name);
+      Files.writeString(myFilePath, name);
     } catch (IOException e) {
       System.out.println("Unable to write file: my-file.txt");
     }
