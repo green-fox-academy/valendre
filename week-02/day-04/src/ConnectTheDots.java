@@ -23,6 +23,7 @@ public class ConnectTheDots {
   }
 
   public static void connectDotsFunction(int[][] points, Graphics graphics) {
+    graphics.setColor(Color.GREEN);
     for (int i = 1; i < points.length; i++) {
       graphics.drawLine(points[i - 1][0], points[i - 1][1], points[i][0], points[i][1]);
     }
