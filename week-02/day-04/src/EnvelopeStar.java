@@ -6,37 +6,18 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class EnvelopeStar {
   public static void mainDraw(Graphics graphics) {
-
+    int steps = 15;
+    int rows = 1;
+    int patternWidth = WIDTH / 2;
     graphics.setColor(Color.WHITE);
     graphics.fillRect(0, 0, WIDTH, HEIGHT);
-
-
-    int steps = 15;
-
-    int rows = 2;
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < rows; j++) {
-
-        int patternWidth = WIDTH/2;
-        graphics.setColor(new Color(88, 216, 97));
-
-        for (int l = 1; l < steps; l++) {
-          int distance = l * patternWidth / steps;
-          graphics.drawLine(WIDTH/2, distance, (WIDTH/2)-distance, WIDTH/2);
-        }
-        for (int l = 1; l < steps; l++) {
-          int distance = l * patternWidth / steps;
-          graphics.drawLine(WIDTH/2, WIDTH-distance, (WIDTH/2)-distance, WIDTH/2);
-        }
-        for (int l = 1; l < steps; l++) {
-          int distance = l * patternWidth / steps;
-          graphics.drawLine(WIDTH/2, WIDTH-distance, WIDTH/2+distance, WIDTH/2);
-        }
-        for (int l = 1; l < steps; l++) {
-          int distance = l * patternWidth / steps;
-          graphics.drawLine(WIDTH/2, WIDTH/2-distance, WIDTH-distance, WIDTH/2);
-        }
-      }
+    graphics.setColor(new Color(88, 216, 97));
+    for (int l = 1; l < steps; l++) {
+      int distance = l * patternWidth / steps;
+      graphics.drawLine(WIDTH / 2, distance, (WIDTH / 2) - distance, WIDTH / 2);
+      graphics.drawLine(WIDTH / 2, WIDTH - distance, (WIDTH / 2) - distance, WIDTH / 2);
+      graphics.drawLine(WIDTH / 2, WIDTH - distance, WIDTH / 2 + distance, WIDTH / 2);
+      graphics.drawLine(WIDTH / 2, WIDTH / 2 - distance, WIDTH - distance, WIDTH / 2);
     }
   }
 
