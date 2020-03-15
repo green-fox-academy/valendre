@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,7 +14,7 @@ public class Logs {
 
   public static void main(String[] args) {
     try {
-      Path path = Paths.get("log.txt");
+      Path path = Paths.get("./textFiles/log.txt");
       List<String> messages = Files.readAllLines(path);
       System.out.println("unique IP adresses");
       String[] uniqueIpArray = uniqueIPfunction(messages.toArray(new String[0]));
@@ -22,38 +23,28 @@ public class Logs {
       float getPercentage = ratio / (1 + ratio) * 100;
       float postPercentage = 1 / (1 + ratio) * 100;
       System.out.println("the GET " + getPercentage + "% / POST request " + postPercentage + "%, ratio " + ratio);
-    } catch (Exception e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
+
   public static String[] uniqueIPfunction(String... args) {
-    List<String> messages = new ArrayList<>();
+    List<String> uniqueIPs = new ArrayList<>();
     for (String message : args) {
-      messages.add(message);
-    }
-    List<String> uniqueIP = new ArrayList<>();
-    for (String message : messages) {
       String[] pieces = message.split(" ");
-      if (uniqueIP.contains(pieces[8])) {
-      } else {
-        uniqueIP.add(pieces[8]);
+      if (!uniqueIPs.contains(pieces[8])) {
+        uniqueIPs.add(pieces[8]);
       }
     }
-    String[] arrayToReturn = new String[uniqueIP.size()];
-    arrayToReturn = uniqueIP.toArray(arrayToReturn);
-    return arrayToReturn;
+    return uniqueIPs.toArray(new String[uniqueIPs.size()]);
+
   }
 
   public static float getPostRatio(String... args) {
-    List<String> messages = new ArrayList<>();
-    for (String message : args) {
-      messages.add(message);
-    }
     int numberOfGet = 0;
     int numberOfPost = 0;
-    float ratio;
-    for (String message : messages) {
+    for (String message : args) {
       String[] pieces = message.split(" ");
       if (pieces[11].equals("GET")) {
         numberOfGet++;
@@ -61,7 +52,6 @@ public class Logs {
         numberOfPost++;
       }
     }
-    ratio = (float) numberOfGet / (float) numberOfPost;
-    return ratio;
+    return  (float) numberOfGet / (float) numberOfPost;
   }
 }

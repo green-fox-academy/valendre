@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,8 +10,6 @@ public class ReversedOrder {
   public static void main(String[] args) {
     // Create a method that decrypts reversed-order.txt
     reverseOrder();
-
-
   }
   public static void reverseOrder() {
 
@@ -22,7 +21,7 @@ public class ReversedOrder {
         newLines.add(oldLines.get(i));
       }
       Files.write(Paths.get("neworder.txt"), newLines);
-    } catch (Exception e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
 
