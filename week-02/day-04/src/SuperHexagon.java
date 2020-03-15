@@ -5,22 +5,24 @@ import java.awt.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class SuperHexagon {
+  // by Endre Valach
+
   public static void mainDraw(Graphics graphics) {
 
-    int columns = 7; // Must be an odd number
+    int columns = 41; // Must be an odd number
 
     int center = (columns - 1) / 2; // Index of the center Column
     int height = HEIGHT / columns; // Height of hexagon
     int edge = (int) (2 / Math.sqrt(3) * height / 2); //Edge of hexagon
 
-    // The margins to position int the center
+    // The margins to position in the center
     int marginLeft = (WIDTH - (edge * (columns * 3 / 2 + 1))) / 2;
     int marginTop = (HEIGHT - (height * columns)) / 2;
 
     //I draw to a white background with black lines
-    graphics.setColor(Color.WHITE);
+    graphics.setColor(new Color(43,43,43));
     graphics.fillRect(0, 0, WIDTH, HEIGHT);
-    graphics.setColor(Color.BLACK);
+    graphics.setColor(new Color(204, 120,50));
 
     //Loops to draw columns and rows
     for (int i = 0; i < columns; i++) {
@@ -59,8 +61,8 @@ public class SuperHexagon {
   }
 
   // region Don't touch the code below
-  static int WIDTH = 320;
-  static int HEIGHT = 320;
+  static int WIDTH = 640;
+  static int HEIGHT = 640;
 
   public static void main(String[] args) {
     JFrame jFrame = new JFrame("Drawing");
