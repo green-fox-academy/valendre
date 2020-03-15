@@ -12,20 +12,15 @@ public class CountLines {
     // It should return zero if it can't open the file, and
     // should not raise any error.
 
-    String fileName = "it_isnt_exist.txt";
-    System.out.println(lineCounter(fileName));
-
+    System.out.println(lineCounter("./textFiles/it_isnt_exist.txt"));
+    System.out.println(lineCounter("./textFiles/duplicated-chars.txt"));
   }
+
   public static int lineCounter(String fileName) {
-    int numberOfLines =1;
     try {
-      Path pathOfFile = Paths.get(fileName);
-      List<String> linesOfFile = Files.readAllLines(pathOfFile);
-      numberOfLines = linesOfFile.size();
+      return Files.readAllLines(Paths.get(fileName)).size();
     } catch (IOException e) {
-      numberOfLines=0;
-    } finally {
-      return numberOfLines;
+      return 0;
     }
   }
 }
