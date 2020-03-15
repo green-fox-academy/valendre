@@ -16,22 +16,16 @@ public class WriteMultipleLines {
   // The function should not raise any errors if it could not write the file.
 
   public static void main(String[] args) {
-    String path = "WriteMultipleLinesFile.txt";
+    String path = "./textFiles/WriteMultipleLinesFile.txt";
     String word = "apple";
     int number = 5;
-
     writeToFile(path, word, number);
-
   }
 
   public static void writeToFile(String path, String word, int number) {
     try {
-      Path myPath = Paths.get(path);
-      List<String> myLines = new ArrayList();
-      for (int i = 1; i <= number; i++) {
-        myLines.add(word);
-      }
-      Files.write(myPath, myLines);
+      word+=("\n"+word).repeat(number-1);
+      Files.writeString(Paths.get(path), word);
     } catch (IOException e) {
 
     }
