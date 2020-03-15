@@ -1,9 +1,6 @@
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.List;
 
 public class WriteSingleLine {
   public static void main(String[] args) {
@@ -17,11 +14,9 @@ public class WriteSingleLine {
     fileManipulator(name);
   }
 
-  public static void fileManipulator (String name) {
+  public static void fileManipulator(String name) {
     try {
-      Path myFilePath = Paths.get("my-file.txt");
-      //List<String> toWrite = Arrays.asList(name);
-      Files.writeString(myFilePath, name);
+      Files.writeString(Paths.get("./textFiles/my-file.txt"), name);
     } catch (IOException e) {
       System.out.println("Unable to write file: my-file.txt");
     }
