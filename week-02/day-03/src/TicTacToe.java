@@ -1,6 +1,8 @@
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 public class TicTacToe {
@@ -22,39 +24,29 @@ public class TicTacToe {
   }
 
   public static String ticTacResult(String filename) {
-
     String winnerIs = "Draw";
     try {
-
-
-
       Path path = Paths.get(filename);
-      List<String> rowsList = Files.readAllLines(path);
-      String[] rows = rowsList.toArray(new String[0]);
-      char[][] square = new char[3][3];
+      String[] rows = Files.readString(path).split("\n");
+
       for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-          square[i][j] = rows[i].charAt(j);
-        }
-      }
-      for (int i = 0; i < 3; i++) {
-        if (square[0][i] == square[1][i] && square[0][i] == square[2][i]) {
-          winnerIs = String.valueOf(square[0][i]);
-        } else if (square[i][0] == square[i][1] && square[i][0] == square[i][2]) {
-          winnerIs = String.valueOf(square[i][0]);
+        if (rows[0].charAt(i) == rows[1].charAt(i) && rows[0].charAt(i) == rows[2].charAt(i)) {
+          winnerIs = String.valueOf(rows[0].charAt(i));
+        } else if ((rows[i].charAt(0) == rows[i].charAt(1) && rows[i].charAt(0) == rows[i].charAt(2))) {
+          winnerIs = String.valueOf(rows[i].charAt(0));
         }
       }
       if (winnerIs.equals("Draw")) {
-        if (square[0][0] == square[1][1] && square[0][0] == square[2][2]) {
-          winnerIs = String.valueOf(square[0][0]);
-        } else if (square[2][0] == square[1][1] && square[2][0] == square[0][2]) {
-          winnerIs = String.valueOf(square[2][0]);
+        if ((rows[0].charAt(0) == rows[1].charAt(1) && rows[0].charAt(0) == rows[2].charAt(2))
+            || (rows[0].charAt(2) == rows[1].charAt(1) && rows[1].charAt(1) == rows[2].charAt(0))) {
+          winnerIs = String.valueOf(rows[1].charAt(1));
         }
       }
+    } catch (IOException e) {
+      e.printStackTrace();
     } catch (Exception e) {
       e.printStackTrace();
     }
     return winnerIs;
-
   }
 }
