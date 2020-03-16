@@ -12,6 +12,5 @@ public class CompareLength {
     if (firstArrayOfNumbers.length < secondArrayOfNumbers.length) {
       System.out.println("secondArrayOfNumbers is longer");
     }
-
   }
 }

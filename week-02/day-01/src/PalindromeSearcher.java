@@ -7,7 +7,6 @@ public class PalindromeSearcher {
     String StrToSearchIn2 = "racecar";
     searchPalindrom(StrToSearchIn);
     searchPalindrom(StrToSearchIn2);
-
   }
 
   public static void searchPalindrom(String inputString) {
@@ -18,16 +17,16 @@ public class PalindromeSearcher {
       if (array[i] == array[i + 2]) {
         int centerOfOddPal = (i + 1);
         palindromes.add("" + array[i] + array[i + 1] + array[i + 2]);
-        boolean hasBiggerPal=true;
+        boolean hasBiggerPal = true;
         int length = 5;
-        while (hasBiggerPal){
-          if(searchOddPal(centerOfOddPal, length, array)) {
-            int startPos =centerOfOddPal-(length-1)/2;
-            int endPos =centerOfOddPal+(length-1)/2;
-            palindromes.add(newPal(startPos,endPos,array));
-            length+=2;
+        while (hasBiggerPal) {
+          if (searchOddPal(centerOfOddPal, length, array)) {
+            int startPos = centerOfOddPal - (length - 1) / 2;
+            int endPos = centerOfOddPal + (length - 1) / 2;
+            palindromes.add(newPal(startPos, endPos, array));
+            length += 2;
           } else {
-            hasBiggerPal=false;
+            hasBiggerPal = false;
           }
         }
       }
@@ -35,38 +34,40 @@ public class PalindromeSearcher {
 
     for (int i = 0; i < inputString.length() - 3; i++) {
       if ((array[i] == array[i + 3]) && (array[i + 1] == array[i + 2])) {
-        int centerOfEvenPal =i + 1;
+        int centerOfEvenPal = i + 1;
         palindromes.add("" + array[i] + array[i + 1] + array[i + 2] + array[i + 3]);
-        boolean hasBiggerPal=true;
+        boolean hasBiggerPal = true;
         int length = 6;
-        while (hasBiggerPal){
-          if(searchOddPal(centerOfEvenPal, length, array)) {
-            int startPos =centerOfEvenPal-(length-2)/2;
-            int endPos =centerOfEvenPal+(length-2)/2+1;
-            palindromes.add(newPal(startPos,endPos,array));
-            length+=2;
+        while (hasBiggerPal) {
+          if (searchOddPal(centerOfEvenPal, length, array)) {
+            int startPos = centerOfEvenPal - (length - 2) / 2;
+            int endPos = centerOfEvenPal + (length - 2) / 2 + 1;
+            palindromes.add(newPal(startPos, endPos, array));
+            length += 2;
           } else {
-            hasBiggerPal=false;
+            hasBiggerPal = false;
           }
         }
       }
     }
     System.out.println(Arrays.toString(palindromes.toArray()));
   }
-  private static boolean searchOddPal (int postition, int length, char[] array) {
-    boolean found =false;
-    int distance = (length-1)/2;
-    if ((postition>=distance)&& (postition+distance<=length)) {
-      if (array[postition-distance] == array[postition+distance]) {
+
+  private static boolean searchOddPal(int postition, int length, char[] array) {
+    boolean found = false;
+    int distance = (length - 1) / 2;
+    if ((postition >= distance) && (postition + distance <= length)) {
+      if (array[postition - distance] == array[postition + distance]) {
         found = true;
       }
     }
     return found;
   }
-  private static String newPal (int startPos, int endPos, char[] array) {
-    String newPal ="";
-    for (int i = startPos; i <=endPos ; i++) {
-      newPal+=array[i];
+
+  private static String newPal(int startPos, int endPos, char[] array) {
+    String newPal = "";
+    for (int i = startPos; i <= endPos; i++) {
+      newPal += array[i];
     }
     return newPal;
   }

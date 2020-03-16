@@ -8,8 +8,8 @@ public class SwapElements {
     String[] orders = {"first", "second", "third"};
     System.out.println(Arrays.toString(orders));
     String a = orders[0];
-    orders[0]=orders[2];
-    orders[2]=a;
+    orders[0] = orders[2];
+    orders[2] = a;
     System.out.println(Arrays.toString(orders));
   }
 }

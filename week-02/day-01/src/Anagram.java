@@ -2,23 +2,22 @@ import java.util.Arrays;
 
 public class Anagram {
   public static void main(String[] args) {
-    String a = "dog";
-    String b = "god";
-    if (anagram(a,b)) {
+    String wordToCompare1 = "dog";
+    String wordToCompare2 = "god";
+    if (anagram(wordToCompare1, wordToCompare2)) {
       System.out.println("These are anagrams");
     }
     System.out.println();
   }
 
-  public static boolean anagram(String a, String b) {
-    boolean c = false;
-    char aarray[] = a.toCharArray();
-    char barray[] = b.toCharArray();
-    Arrays.sort(aarray);
-    Arrays.sort(barray);
-    if (Arrays.equals(aarray, barray)) {
-      c = true;
+  public static boolean anagram(String wordToCompare1, String wordToCompare2) {
+    char charArray1[] = wordToCompare1.toCharArray();
+    char charArray2[] = wordToCompare2.toCharArray();
+    Arrays.sort(charArray1);
+    Arrays.sort(charArray2);
+    if (Arrays.equals(charArray1, charArray2)) {
+      return true;
     }
-    return c;
+    return false;
   }
 }

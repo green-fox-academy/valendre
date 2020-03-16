@@ -8,10 +8,9 @@ public class ChangeElement {
   public static void main(String[] args) {
     int[] numbers = {1, 2, 3, 8, 5, 6};
     Arrays.sort(numbers);
-    int a = Arrays.binarySearch(numbers, 8);
-    numbers[a] = 4;
+    int indexOfEight = Arrays.binarySearch(numbers, 8);
+    numbers[indexOfEight] = 4;
     Arrays.sort(numbers);
     System.out.println(numbers[3]);
-
   }
 }

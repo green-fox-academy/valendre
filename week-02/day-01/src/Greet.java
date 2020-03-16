@@ -7,11 +7,11 @@ public class Greet {
   //     - Greeting is printing e.g. `Greetings dear, Green Fox`
   // - Greet `al`
   public static void main(String[] args) {
-    String al = "Green Fox";
-    greet(al);
+    String name = "Green Fox";
+    greet(name);
   }
 
-  public static void greet(String a) {
-    System.out.println("Greetings dear, " + a);
+  public static void greet(String name) {
+    System.out.println("Greetings dear, " + name);
   }
 }

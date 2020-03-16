@@ -13,22 +13,20 @@ public class SubInt {
     //  should print: '[]'
   }
 
-  public static int[] subInt(int a, int[] input) {
+  public static int[] subInt(int searchFor, int[] arrayToSearchIn) {
 
-    int c =0;
-    int[] newarray= new int[input.length];
-    for (int i = 0; i < input.length; i++) {
-      String uj = Integer.toString(a);
-      String in = Integer.toString(input[i]);
-      if(in.contains(uj)) {
-        newarray[c]=i;
-        c++;
+    int lengthOfNewArray = 0;
+    int[] newArray = new int[arrayToSearchIn.length];
+    for (int i = 0; i < arrayToSearchIn.length; i++) {
+      String uj = Integer.toString(searchFor);
+      String in = Integer.toString(arrayToSearchIn[i]);
+      if (in.contains(uj)) {
+        newArray[lengthOfNewArray] = i;
+        lengthOfNewArray++;
       }
-
     }
-    int[] rearray = Arrays.copyOfRange(newarray, 0,c);
-    System.out.println(Arrays.toString(rearray));
-    return newarray;
-
+    int[] reArray = Arrays.copyOfRange(newArray, 0, lengthOfNewArray);
+    System.out.println(Arrays.toString(reArray));
+    return reArray;
   }
 }

@@ -19,14 +19,12 @@ public class DiagonalMatrix {
           twoDim[i][j]=0;
         }
       }
-
     }
     for (int i = 0; i < lengthOfArray; i++) {
       for (int j = 0; j < lengthOfArray; j++) {
         System.out.print(twoDim[i][j] + " ");
       }
       System.out.println();
-
     }
   }
 }

@@ -8,21 +8,20 @@ public class Sum {
     System.out.println(sum(number));
   }
 
-  public static int sum(int a) {
-    int b = 0;
-    boolean n = false;
-    if (a < 0) {
-      n = true;
-      a *= -1;
+  public static int sum(int highestNumToSum) {
+    int sumOfNums = 0;
+    boolean negative = false;
+    if (highestNumToSum < 0) {
+      negative = true;
+      highestNumToSum *= -1;
     }
-    for (int i = 0; i <= a; i++) {
-      b += i;
+    for (int i = 0; i <= highestNumToSum; i++) {
+      sumOfNums += i;
     }
-    if (n) {
-      b *= -1;
+    if (negative) {
+      sumOfNums *= -1;
     }
-    return b;
-
+    return sumOfNums;
   }
 
 }

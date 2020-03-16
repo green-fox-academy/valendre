@@ -10,22 +10,20 @@ public class Unique {
     //  should print: `[1, 11, 34, 52, 61]`
   }
 
-  public static int[] unique(int[] a) {
-    int c = 1;
-    Arrays.sort(a);
-    int[] b = new int[a.length];
-    b[0]=a[0];
-    for (int i = 1; i < a.length; i++) {
-      if (a[i - 1] != a[i]) {
-        b[c] = a[i];
-        c++;
-
+  public static int[] unique(int[] oldArray) {
+    int lengthOfNewArray = 1;
+    Arrays.sort(oldArray);
+    int[] newArray = new int[oldArray.length];
+    newArray[0] = oldArray[0];
+    for (int i = 1; i < oldArray.length; i++) {
+      if (oldArray[i - 1] != oldArray[i]) {
+        newArray[lengthOfNewArray] = oldArray[i];
+        lengthOfNewArray++;
       }
     }
-    int d[] = Arrays.copyOfRange(b,0,c);
+    int d[] = Arrays.copyOfRange(newArray, 0, lengthOfNewArray);
     System.out.println(Arrays.toString(d));
     return d;
   }
-
 }
 

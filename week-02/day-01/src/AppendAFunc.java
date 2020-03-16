@@ -9,10 +9,11 @@
 
 public class AppendAFunc {
   public static void main(String[] args) {
-    String typo ="Chinchill";
-    System.out.println(appendAFunc(typo));
+    String wordToAppendA = "Chinchill";
+    System.out.println(appendAFunc(wordToAppendA));
   }
-  public static String appendAFunc (String a) {
-    return a+"a";
+
+  public static String appendAFunc(String wordToAppendA) {
+    return wordToAppendA + "a";
   }
 }
