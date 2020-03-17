@@ -1,17 +1,15 @@
 package blogpost;
 
-import java.util.Date;
-
 public class BlogPost {
   String authorName;
   String title;
   String text;
-  Date publicationDate;
+  String publicationDate;
 
-  public BlogPost(String authorName, String title, String text, int publicationDate) {
-    this.authorName=authorName;
-    this.title=title;
-    this.text=text;
-    this.publicationDate=publicationDate;
+  public BlogPost(String authorName, String title, String text, String publicationDate) {
+    this.authorName = authorName;
+    this.title = title;
+    this.text = text;
+    this.publicationDate = publicationDate;
   }
 }
