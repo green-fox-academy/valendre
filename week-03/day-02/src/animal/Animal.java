@@ -1,7 +1,7 @@
 package animal;
 
 public class Animal {
-  int hunger;
+  public int hunger;
   int thirst;
 
   public Animal() {
@@ -22,5 +22,8 @@ public class Animal {
   public void play() {
     hunger++;
     thirst++;
+  }
+  public int getHunger() {
+    return hunger;
   }
 }

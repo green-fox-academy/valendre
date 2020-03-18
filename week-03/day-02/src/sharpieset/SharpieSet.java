@@ -5,13 +5,13 @@ import java.util.List;
 import sharpie.Sharpie;
 
 public class SharpieSet {
-  List<Sharpie> listOfSharpies = new ArrayList<>();
+  List<Sharpie> listOfSharpies;
   int numberOfUsable;
 
   public void countUsable() {
     numberOfUsable = 0;
     for (Sharpie sharpieToCount : listOfSharpies) {
-      if (sharpieToCount.inkAmount > 0) {
+      if (sharpieToCount.getInkAmount() > 0) {
         numberOfUsable++;
       }
     }
@@ -19,7 +19,7 @@ public class SharpieSet {
 
   public void removeTrash() {
     for (int i = 0; i < listOfSharpies.size(); i++) {
-      if (listOfSharpies.get(i).inkAmount == 0) {
+      if (listOfSharpies.get(i).getInkAmount() == 0) {
         listOfSharpies.remove(i);
         i--;
       }
