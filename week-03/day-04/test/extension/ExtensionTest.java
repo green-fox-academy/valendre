@@ -42,6 +42,12 @@ public class ExtensionTest {
   }
 
   @Test
+  public void testMaxOfThree_onemissing() {
+    assertEquals(5, extension.maxOfThree(5, 4));
+  }
+
+
+  @Test
   public void testMedian_four() {
     assertEquals(5, extension.median(Arrays.asList(7,5,3,5)),0.1);
   }
@@ -83,5 +89,15 @@ public class ExtensionTest {
   @Test
   public void testTranslate_elszalaszt() {
     assertEquals("evelszavalavaszt", extension.translate("elszalaszt"));
+  }
+
+  @Test
+  public void testTranslate_lehetetlen() {
+    assertEquals("levehevetevetleven", extension.translate("lehetetlen"));
+  }
+
+  @Test
+  public void testTranslate_bdpst() {
+    assertEquals("bdpst", extension.translate("bdpst"));
   }
 }
