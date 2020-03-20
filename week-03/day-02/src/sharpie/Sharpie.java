@@ -13,7 +13,19 @@ public class Sharpie {
 
   public void use() {
     inkAmount--;
+    if (inkAmount < 0) {
+      inkAmount = (float)0;
+    }
   }
+
+  public void use(float timesOfUse) {
+    if (inkAmount < timesOfUse) {
+      inkAmount = (float)0;
+    } else {
+      inkAmount -= timesOfUse;
+    }
+  }
+
   public Float getInkAmount() {
     return inkAmount;
   }
