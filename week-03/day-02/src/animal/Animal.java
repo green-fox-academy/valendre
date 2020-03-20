@@ -14,16 +14,28 @@ public class Animal {
   }
 
   public void eat() {
-    hunger--;
+    this.hunger--;
+    if (hunger < 0) {
+      this.hunger = 0;
+    }
   }
+
   public void drink() {
-    thirst--;
+    this.thirst--;
+    if (this.thirst<0) {
+      this.thirst=0;
+    }
   }
+
   public void play() {
-    hunger++;
-    thirst++;
+    this.hunger++;
+    this.thirst++;
   }
+
   public int getHunger() {
-    return hunger;
+    return this.hunger;
+  }
+  public int getThirst(){
+    return this.thirst;
   }
 }

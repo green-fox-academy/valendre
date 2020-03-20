@@ -37,12 +37,4 @@ public class SharpieTest {
     usedSharpie.inkAmount = (float) randomInkAmount;
     assertEquals((double) randomInkAmount, (double) usedSharpie.getInkAmount(), 0);
   }
-
-  @Test
-  public void getInkAmountUsedRandomTimes() {
-    Sharpie usedSharpie = new Sharpie("Yellow", 5);
-    int randomInkAmount = (int) Math.random() * 100;
-    usedSharpie.inkAmount = (float) randomInkAmount;
-    assertEquals((double) randomInkAmount, (double) usedSharpie.getInkAmount(), 0);
-  }
 }
