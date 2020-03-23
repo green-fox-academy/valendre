@@ -18,12 +18,12 @@ public class Garden {
     System.out.println("Watering with " + (int) amountWater);
     int numberOfThirstyPlants = 0;
     for (int i = 0; i < this.garden.size(); i++) {
-      if (this.garden.get(i).getMinWater() > this.garden.get(i).getWaterAmount()) {
+      if (this.garden.get(i).minWater > this.garden.get(i).waterAmount) {
         numberOfThirstyPlants++;
       }
     }
     for (int i = 0; i < this.garden.size(); i++) {
-      if (this.garden.get(i).getMinWater() > this.garden.get(i).getWaterAmount()) {
+      if (this.garden.get(i).minWater > this.garden.get(i).waterAmount) {
         this.garden.get(i).watering(amountWater / numberOfThirstyPlants);
       }
       this.garden.get(i).printInfo();

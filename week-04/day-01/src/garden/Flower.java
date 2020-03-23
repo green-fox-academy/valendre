@@ -4,7 +4,7 @@ public class Flower extends Plant {
 
   public Flower(String color) {
     super(color);
-    this.setPercentageOfAbsorb(75);
-    this.setMinWater(5);
+    this.percentageOfAbsorb = 75;
+    this.minWater = 5;
   }
 }
