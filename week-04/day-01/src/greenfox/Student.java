@@ -1,6 +1,6 @@
 package greenfox;
 
-public class Student extends Person {
+public class Student extends Person implements Cloneable {
   private String previousOrganization;
   private int skippedDays;
 
@@ -10,6 +10,11 @@ public class Student extends Person {
     this.skippedDays = 0;
   }
 
+  @Override
+  protected Student clone() {
+    return new Student(this.getName(), this.getAge(), this.getGender(), this.getPreviousOrganization());
+  }
+
   public Student(String name, int age, String gender, String previousOrganization) {
     super(name, age, gender);
     this.previousOrganization = previousOrganization;
@@ -17,6 +22,10 @@ public class Student extends Person {
 
   public void getGoal() {
     System.out.println("Be a junior software developer.");
+  }
+
+  public String getPreviousOrganization() {
+    return this.previousOrganization;
   }
 
   public void introduce() {
