@@ -41,11 +41,6 @@ public class ExtensionTest {
     assertEquals(5, extension.maxOfThree(3, 5, 4));
   }
 
-  @Test
-  public void testMaxOfThree_onemissing() {
-    assertEquals(5, extension.maxOfThree(5, 4));
-  }
-
 
   @Test
   public void testMedian_four() {

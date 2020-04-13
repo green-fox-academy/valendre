@@ -8,7 +8,7 @@ public class SuperHaxagonSecondTime {
 
   public static void mainDraw(Graphics graphics) {
 
-    int columns = 7; // Must be an odd number
+    int columns = 11; // Must be an odd number
     int center = (columns - 1) / 2; // Index of the center Column
     int height = HEIGHT / columns; // Height of hexagon
     int edge = (int) (2 / Math.sqrt(3) * height / 2); //Edge of hexagon
@@ -26,10 +26,9 @@ public class SuperHaxagonSecondTime {
         int xPos = j * edge * 3 / 2 + marginLeft;
         int yPos = i * height + marginTop;
         int indexToHideTop = Math.abs(center - j) / 2;
-        int indexToHideBottom = columns - indexToHideTop;
+        int indexToHideBottom = columns - indexToHideTop - ((j+1)%2)*((center-1)/ 2-1);
         if ((j + center) % 2 == 1) {
           yPos += height / 2; // Push down the even columns
-          indexToHideBottom -= center / 2;
         }
 
         Polygon hexagon = new Polygon();
@@ -48,8 +47,8 @@ public class SuperHaxagonSecondTime {
   }
 
   // region Don't touch the code below
-  static int WIDTH = 640;
-  static int HEIGHT = 640;
+  static int WIDTH = 720;
+  static int HEIGHT = 720;
 
   public static void main(String[] args) {
     JFrame jFrame = new JFrame("Drawing");

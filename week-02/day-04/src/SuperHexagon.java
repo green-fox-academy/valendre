@@ -9,10 +9,10 @@ public class SuperHexagon {
 
   public static void mainDraw(Graphics graphics) {
 
-    int columns = 41; // Must be an odd number
+    int columns = 11; // Must be an odd number
 
     int center = (columns - 1) / 2; // Index of the center Column
-    int height = HEIGHT / columns; // Height of hexagon
+    int height = 65; //HEIGHT / columns; // Height of hexagon
     int edge = (int) (2 / Math.sqrt(3) * height / 2); //Edge of hexagon
 
     // The margins to position in the center
@@ -35,14 +35,11 @@ public class SuperHexagon {
         int fromCenter = Math.abs(center - j); //How far the column is from the center
 
         if ((fromCenter / 2) <= i) { // Shaping the top section
-
           if ((j + center) % 2 == 0) { //Odd columns (counting from the center
             if (i < (columns - fromCenter / 2)) { // Shaping the bottom section of Odd columns
               drawHexagon(xPos, yPos, edge, height, graphics);
             }
-
           } else if (i < (columns - fromCenter) / 2 + center) { // "Even" columns
-
             yPos += height / 2; // Push down the even columns
             drawHexagon(xPos, yPos, edge, height, graphics);
           }
@@ -52,17 +49,20 @@ public class SuperHexagon {
   }
 
   public static void drawHexagon(int xPos, int yPos, int edge, int height, Graphics graphics) {
-    graphics.drawLine(xPos, yPos + height / 2, xPos + edge / 2, yPos);
-    graphics.drawLine(xPos + edge / 2, yPos, xPos + edge * 3 / 2, yPos);
-    graphics.drawLine(xPos + edge * 3 / 2, yPos, xPos + edge * 2, yPos + height / 2);
-    graphics.drawLine(xPos + edge * 2, yPos + height / 2, xPos + edge * 3 / 2, yPos + height);
-    graphics.drawLine(xPos + edge * 3 / 2, yPos + height, xPos + edge / 2, yPos + height);
-    graphics.drawLine(xPos + edge / 2, yPos + height, xPos, yPos + height / 2);
+    Polygon hexagon = new Polygon();
+    hexagon.addPoint(xPos, yPos + height / 2);
+    hexagon.addPoint(xPos + edge / 2, yPos);
+    hexagon.addPoint(xPos + edge * 3 / 2, yPos);
+    hexagon.addPoint(xPos + edge * 2, yPos + height / 2);
+    hexagon.addPoint(xPos + edge * 3 / 2, yPos + height);
+    hexagon.addPoint(xPos + edge / 2, yPos + height);
+    graphics.setColor(new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255)));
+    graphics.fillPolygon(hexagon);
   }
 
   // region Don't touch the code below
-  static int WIDTH = 640;
-  static int HEIGHT = 640;
+  static int WIDTH = 720;
+  static int HEIGHT = 720;
 
   public static void main(String[] args) {
     JFrame jFrame = new JFrame("Drawing");
