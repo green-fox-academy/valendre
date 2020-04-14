@@ -1,11 +1,9 @@
 package exercise10;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.w3c.dom.ls.LSOutput;
 
 /*
 Write a Stream Expression to find the foxes with green color!
