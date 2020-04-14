@@ -11,7 +11,7 @@ public class Exercise9 {
 
     Map<String, Long> counterMap = new HashMap<>();
 
-    Map<String, Long> characterFrequency = Arrays.stream(exampleString.toLowerCase().split(""))
+    Map<String, Long> characterFrequency = Arrays.stream(exampleString.split(""))
         .collect(Collectors.groupingBy(character -> character, Collectors.counting()));
 
     System.out.println(characterFrequency);
