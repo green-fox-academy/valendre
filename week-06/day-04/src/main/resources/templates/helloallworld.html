@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Say Hello to all the world</title>
+</head>
+<body>
+<p th:style="'color: ' + ${color} + ';  font-size: ' +${size}+'px;'" th:text="${hello}"/>
+</body>
+</html>
