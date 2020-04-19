@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -11,8 +12,9 @@ public class Exercise12 {
 
   public static void main(String[] args) throws IOException {
 
-    String maxWeight = Files.readAllLines(Paths.get("text/swcharacters.txt"))
+    String maxWeight = Files.readAllLines(Paths.get("text/swcharacters.csv"))
         .stream()
+        .skip(1)
         .map(string -> string.replace(",", "."))
         .map(string -> Arrays.asList(string.split(";")))
         .collect(Collectors.toMap(cell -> cell.get(0), cell -> cell.get(2)))
@@ -25,8 +27,9 @@ public class Exercise12 {
 
     System.out.println("The heaviest character is " + maxWeight);
 
-    double averageMaleHeight = Files.readAllLines(Paths.get("text/swcharacters.txt"))
+    double averageMaleHeight = Files.readAllLines(Paths.get("text/swcharacters.csv"))
         .stream()
+        .skip(1)
         .map(string -> string.replace(",", "."))
         .map(string -> Arrays.asList(string.split(";")))
         .filter(cell -> cell.get(7).equals("male"))
@@ -40,8 +43,9 @@ public class Exercise12 {
 
     System.out.println("Average height of the male characters is " + averageMaleHeight);
 
-    double averageFemaleHeight = Files.readAllLines(Paths.get("text/swcharacters.txt"))
+    double averageFemaleHeight = Files.readAllLines(Paths.get("text/swcharacters.csv"))
         .stream()
+        .skip(1)
         .map(string -> string.replace(",", "."))
         .map(string -> Arrays.asList(string.split(";")))
         .filter(cell -> cell.get(7).equals("female"))
@@ -55,9 +59,33 @@ public class Exercise12 {
 
     System.out.println("Average height of the female characters is " + averageFemaleHeight);
 
+    Map<Object, Map<Object, Long>> ageDistribution =
+        Files.readAllLines(Paths.get("text/swcharacters.csv"))
+            .stream()
+            .skip(1)
+            .map(string -> Arrays.asList(string.split(";")))
+            .collect(Collectors.groupingBy(gender -> {
+                  if (gender.get(7).equals("male") || gender.get(7).equals("female")) {
+                    return gender.get(7);
+                  } else {
+                    return "other";
+                  }
+                },
+                Collectors.groupingBy(ageGroup -> {
+                  try {
+                    if (Integer.parseInt(ageGroup.get(6).replace("BBY", "")) < 21) {
+                      return "below 21";
+                    } else if (Integer.parseInt(ageGroup.get(6).replace("BBY", "")) <= 40) {
+                      return "between 21-40";
+                    } else {
+                      return "above 40";
+                    }
+                  } catch (NumberFormatException f) {
+                    return "unknown";
+                  }
+                }, Collectors.counting())));
 
-
+    System.out.println(ageDistribution);
 
   }
-
 }
