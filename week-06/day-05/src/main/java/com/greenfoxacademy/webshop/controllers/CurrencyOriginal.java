@@ -5,12 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class CurrencyEuro {
+public class CurrencyOriginal {
 
-  @RequestMapping(value="/euro")
-  public String renderMain(){
-    WebshopApplication.setCurrency("€");
+  @RequestMapping(value = "/original-currency")
+  public String renderMain() {
+    WebshopApplication.setCurrency("Kč");
     return "redirect:" + WebshopApplication.getCurrentController();
   }
 }
-

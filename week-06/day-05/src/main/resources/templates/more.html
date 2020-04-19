@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Webshop</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-$END$
+<header>
+    <div class="top">
+        <a href="/">My Shop</a>
+        <a href="/more-filters">More >></a>
+    </div>
+    <nav>
+        <a href="/filter-by-type?type=clothes-and-shoes">Clothes and shoes</a>
+        <a href="/filter-by-type?type=electronics">Electronics</a>
+        <a href="/filter-by-type?type=beverages-and-snacks">Beverages and snacks</a>
+        <a href="/euro">Euro</a>
+        <a href="/original-currency">oroginal curreny</a>
+    </nav>
+    <form action="/filter-by-price" method="post">
+        <div class="fifty flex">
+            <input class="type" type="submit" name="submit" value="above">
+            <input class="type" type="submit" name="submit" value="below">
+            <input class="type" type="submit" name="submit" value="exactly">
+        </div>
+        <div class="fifty">
+            <label for="price">Filter by price:</label>
+            <input type="number" id="price" name="price" placeholder="...e.g.: 300" required>
+        </div>
+    </form>
+</header>
+<main>
+
+    <p th:if="${paragraph}!=''" th:text="${paragraph}">
+    <table th:if="${#lists.size(items)>0}">
+        <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity of stock</th>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.getName()}"></td>
+            <td th:text="${item.getDescription()}"></td>
+            <td class="number" th:if="${currency}=='€' "
+                th:text="${#numbers.formatDecimal(item.getPrice()*czkpereur, 0, 'COMMA', 2, 'POINT')} + ' ' + ${currency}"></td>
+            <td class="number" th:if="${currency}=='Kč' " th:text="${item.getPrice()}+ ' ' + ${currency}"></td>
+            <td class="number" th:text="${item.getQuantityOfStock()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

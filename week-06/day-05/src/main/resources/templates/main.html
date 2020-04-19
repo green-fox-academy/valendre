@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Webshop</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-$END$
+<header>
+    <div class="top">
+        <a href="/">My Shop</a>
+        <a href="/more-filters">More >></a>
+    </div>
+    <nav>
+        <a href="/only-avaible">Only avaible</a>
+        <a href="/cheapest-first">Cheapest first</a>
+        <a href="/contains-nike">Contains nike</a>
+        <a href="/average-stock">Average stock</a>
+        <a href="/most-expensive">Most expensive avaible</a>
+    </nav>
+    <form action="/search" method="post">
+        <div class="eighty">
+            <label for="search">Search for:</label>
+            <input type="text" id="search" name="search" placeholder="...something like nike" required>
+        </div>
+        <div class="twenty">
+            <input type="submit" id="submit" value="Search">
+        </div>
+    </form>
+</header>
+<main>
+    <p th:if="${paragraph}!=''" th:text="${paragraph}">
+    <table th:if="${#lists.size(items)>0}">
+        <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity of stock</th>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.getName()}"></td>
+            <td th:text="${item.getDescription()}"></td>
+            <td class="number" th:if="${currency}=='€' "
+                th:text="${#numbers.formatDecimal(item.getPrice()*czkpereur, 0, 'COMMA', 2, 'POINT')} + ' ' + ${currency}"></td>
+            <td class="number" th:if="${currency}=='Kč' " th:text="${item.getPrice()}+ ' ' + ${currency}"></td>
+            <td class="number" th:text="${item.getQuantityOfStock()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>
