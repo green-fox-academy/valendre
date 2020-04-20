@@ -59,7 +59,7 @@ public class Exercise12 {
 
     System.out.println("Average height of the female characters is " + averageFemaleHeight);
 
-    Map<Object, Map<Object, Long>> ageDistribution =
+    Map<String, Map<String, Long>> ageDistribution =
         Files.readAllLines(Paths.get("text/swcharacters.csv"))
             .stream()
             .skip(1)
@@ -80,7 +80,7 @@ public class Exercise12 {
                     } else {
                       return "above 40";
                     }
-                  } catch (NumberFormatException f) {
+                  } catch (NumberFormatException e) {
                     return "unknown";
                   }
                 }, Collectors.counting())));
