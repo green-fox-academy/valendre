@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Exercise #</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <meta charset="utf-8"/>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>index</th>
+        <th>name</th>
+        <th>balance</th>
+        <th>animal type</th>
+        <th>Is he or she a king?</th>
+        <th>Good or bad?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bankAccount : ${bankAccounts}" th:object="${bankAccount}">
+        <td th:text="${bankAccountStat.index}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{#numbers.formatDecimal(balance, 0, 2, 'POINT')+' Zebra'}"></td>
+        <td th:text="*{animalType}"></td>
+        <td th:style="${bankAccount.king ? 'font-weight: bold;':''}"
+            th:text="${bankAccount.king ? 'He is a king' : 'not a king'}"></td>
+        <td th:text="${bankAccount.good ? 'Good one' : 'Bad guy'}"></td>
+    </tr>
+    </tbody>
+</table>
+<form action="/addmoney" method="post">
+    <select name="raise">
+        <option th:each="bankAccount : ${bankAccounts}"
+                th:value="${bankAccountStat.index}"
+                th:text="${bankAccount.name} + ' +10' + ${bankAccount.king ? '0 Zebra' : ' Zebra'}">
+        </option>
+    </select>
+    <input type="submit" value="raise balance">
+</form>
+
+<form action="/addaccount" method="post" th:object="${emptyBankAccount}">
+    <input type="text" th:field="*{name}">
+    <input type="text" th:field="*{balance}">
+    <input type="text" th:field="*{animalType}">
+    <input type="checkbox" th:field="${emptyBankAccount.king}"  th:checked="*{king}">
+    <input type="checkbox" th:field="${emptyBankAccount.good}"  th:checked="*{good}">
+    <input type="submit" value="add acount">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+body {
+    Font-family: "Arial";
+    background-color: slategray;
+}
+
+table {
+    margin: 20px auto;
+}
+
+td, th {
+    padding: 1em;
+
+}
+th {
+    background-color: darkgrey;
+    color: white;
+}
+td {
+    background-color: aliceblue;
+    color: black;
+}
+
+input, select {
+    outline: none;
+    padding: 1em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+input {
+background-color: darkslategray;
+    color: white;
+}
