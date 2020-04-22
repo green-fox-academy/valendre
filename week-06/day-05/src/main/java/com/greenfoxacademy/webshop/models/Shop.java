@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shop {
-  private List<ShopItem> items = new ArrayList() {{
-
-  }};
+  private List<ShopItem> items = new ArrayList<>();
 
   public Shop() {
     this.items.add(new ShopItem("Running shoes", "Nike runing shoes for every day sport", 1000, 5, ItemType.CLOTHES));

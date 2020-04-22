@@ -16,17 +16,21 @@ public class FilterByType {
   @RequestMapping(value = "/filter-by-type")
   public String renderMain(Model model, @RequestParam String type) {
     ItemType itemType;
-    if (type.equals("clothes-and-shoes")) {
-      itemType = ItemType.CLOTHES;
-      WebshopApplication.setParagraph("Only clothes and shoes:");
-    } else if (type.equals("electronics")) {
-      WebshopApplication.setParagraph("Only electronis:");
-      itemType = ItemType.ELECTRONIC;
-    } else if (type.equals("beverages-and-snacks")) {
-      WebshopApplication.setParagraph("Only beverages and snacks:");
-      itemType = ItemType.SNACK;
-    } else {
-      return "redirect:"+WebshopApplication.getCurrentController();
+    switch (type) {
+      case "clothes-and-shoes":
+        itemType = ItemType.CLOTHES;
+        WebshopApplication.setParagraph("Only clothes and shoes:");
+        break;
+      case "electronics":
+        WebshopApplication.setParagraph("Only electronis:");
+        itemType = ItemType.ELECTRONIC;
+        break;
+      case "beverages-and-snacks":
+        WebshopApplication.setParagraph("Only beverages and snacks:");
+        itemType = ItemType.SNACK;
+        break;
+      default:
+        return "redirect:" + WebshopApplication.getCurrentController();
     }
     WebshopApplication.setCurrentController("/filter-by-type?type=" + type);
     List<ShopItem> listToRender = WebshopApplication.getMyShop().getItems().stream()

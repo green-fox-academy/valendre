@@ -6,6 +6,7 @@ import com.greenfoxacademy.webshop.WebshopApplication;
 import com.greenfoxacademy.webshop.models.ShopItem;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,15 +17,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class FilterByPrice {
   @RequestMapping(value = "/filter-by-price", method = {RequestMethod.POST, RequestMethod.GET})
-  public String renderMain(Model model, @RequestParam(required = false) String price,
-                           @RequestParam(required = false) String submit) {
+  public String renderMain(Model model, @RequestParam(required = false) Optional<String> optionalPrice,
+                           @RequestParam(required = false) Optional<String> optionalSubmit) {
 
     double doublePrice;
-    try {
-      price.toLowerCase();
-    } catch (NullPointerException e) {
+    String price ="";
+    String submit="";
+    if ( optionalPrice.isPresent() ) {
       price = WebshopApplication.getLastPrice();
+    } else {
+      price = optionalPrice.toString();
+    }
+    if ( optionalSubmit.isPresent() ) {
       submit = WebshopApplication.getLastSubmit();
+    } else {
+      price = optionalSubmit.toString();
     }
     try {
       if (WebshopApplication.getCurrency().equals("€")) {
@@ -39,18 +46,22 @@ public class FilterByPrice {
     WebshopApplication.setLastSubmit(submit);
     WebshopApplication.setCurrentController("/filter-by-price");
     List<ShopItem> listToRender = new ArrayList<>();
-    if (submit.equals("above")) {
-      listToRender = WebshopApplication.getMyShop().getItems().stream()
-          .filter(item -> round(item.getPrice()) > round(doublePrice))
-          .collect(Collectors.toList());
-    } else if (submit.equals("below")) {
-      listToRender = WebshopApplication.getMyShop().getItems().stream()
-          .filter(item -> round(item.getPrice()) < round(doublePrice))
-          .collect(Collectors.toList());
-    } else if (submit.equals("exactly")) {
-      listToRender = WebshopApplication.getMyShop().getItems().stream()
-          .filter(item -> round(item.getPrice()) == round(doublePrice))
-          .collect(Collectors.toList());
+    switch (submit) {
+      case "above":
+        listToRender = WebshopApplication.getMyShop().getItems().stream()
+            .filter(item -> round(item.getPrice()) > round(doublePrice))
+            .collect(Collectors.toList());
+        break;
+      case "below":
+        listToRender = WebshopApplication.getMyShop().getItems().stream()
+            .filter(item -> round(item.getPrice()) < round(doublePrice))
+            .collect(Collectors.toList());
+        break;
+      case "exactly":
+        listToRender = WebshopApplication.getMyShop().getItems().stream()
+            .filter(item -> round(item.getPrice()) == round(doublePrice))
+            .collect(Collectors.toList());
+        break;
     }
     if (listToRender.size() == 0) {
       WebshopApplication.setParagraph("No items found " + submit + " " + price + " "
