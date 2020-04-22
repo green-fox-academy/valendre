@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -12,8 +11,7 @@ public class Exercise12 {
 
   public static void main(String[] args) throws IOException {
 
-    String maxWeight = Files.readAllLines(Paths.get("text/swcharacters.csv"))
-        .stream()
+    String maxWeight = Files.lines(Paths.get("text/swcharacters.csv"))
         .skip(1)
         .map(string -> string.replace(",", "."))
         .map(string -> Arrays.asList(string.split(";")))
@@ -27,8 +25,7 @@ public class Exercise12 {
 
     System.out.println("The heaviest character is " + maxWeight);
 
-    double averageMaleHeight = Files.readAllLines(Paths.get("text/swcharacters.csv"))
-        .stream()
+    double averageMaleHeight = Files.lines(Paths.get("text/swcharacters.csv"))
         .skip(1)
         .map(string -> string.replace(",", "."))
         .map(string -> Arrays.asList(string.split(";")))
@@ -43,8 +40,7 @@ public class Exercise12 {
 
     System.out.println("Average height of the male characters is " + averageMaleHeight);
 
-    double averageFemaleHeight = Files.readAllLines(Paths.get("text/swcharacters.csv"))
-        .stream()
+    double averageFemaleHeight = Files.lines(Paths.get("text/swcharacters.csv"))
         .skip(1)
         .map(string -> string.replace(",", "."))
         .map(string -> Arrays.asList(string.split(";")))
@@ -60,8 +56,7 @@ public class Exercise12 {
     System.out.println("Average height of the female characters is " + averageFemaleHeight);
 
     Map<String, Map<String, Long>> ageDistribution =
-        Files.readAllLines(Paths.get("text/swcharacters.csv"))
-            .stream()
+        Files.lines(Paths.get("text/swcharacters.csv"))
             .skip(1)
             .map(string -> Arrays.asList(string.split(";")))
             .collect(Collectors.groupingBy(gender -> {
