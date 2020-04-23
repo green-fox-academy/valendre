@@ -19,8 +19,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StudentService {
+public class StudentService implements StudentInterface{
   private List<String> names;
+
 
   public StudentService() {
     names = new ArrayList<>();
@@ -29,23 +30,32 @@ public class StudentService {
     names.add("John");
   }
 
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
+
+  @Override
   public List<String> findAll() {
     return names;
   }
 
+  @Override
   public void save(String student) {
     names.add(student);
   }
 
+  @Override
   public int count() {
     return names.size();
   }
 
-  public boolean check(String name) {
+  @Override
+  public String check(String name) {
     if (names.contains(name)) {
-      return true;
+      return name + " is already in the list.";
     }
-    return false;
+    return name + "is not in the list.";
   }
 }
 

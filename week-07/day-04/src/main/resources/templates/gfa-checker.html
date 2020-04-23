@@ -2,14 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>gfa-check</title>
+    <title>gfa-main</title>
     <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
-<form action="/gfa/checker" method="post">
-    <input type="text" name="name">
-    <input type="submit" value="check student">
-</form>
+<p th:text="${paragraph}"></p>
+
 
 </body>
 </html>
