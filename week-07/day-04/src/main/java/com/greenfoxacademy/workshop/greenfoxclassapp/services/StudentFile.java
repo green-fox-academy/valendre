@@ -42,7 +42,7 @@ public class StudentFile implements StudentInterface{
       try {
         BufferedWriter writer = new BufferedWriter(new FileWriter(this.filename,
             true));
-        writer.newLine();   //Add new line
+        writer.newLine();
         writer.write(student);
         writer.close();
       } catch (IOException e) {
