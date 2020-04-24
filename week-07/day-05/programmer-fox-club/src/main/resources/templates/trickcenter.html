@@ -9,9 +9,10 @@
 <ul>
     <li><a th:href="'/?name=' + *{name}">Information</a></li>
     <li><a th:href="'/nutritionstore?name=' + *{name}">Nutrition store</a></li>
+    <li><a th:href="'/trickCenter?name=' + *{name}">Trick center</a></li>
 </ul>
 
-<form action="/learntricks" method="post" th:if="*{tricks.size()>0}">
+<form action="/learntricks" method="post" th:unless="${tricks.size()==0}">
     <input type="hidden" name="name" th:value="*{name}">
     <label for="trick">Tricks</label>
     <select id="trick" name="trick">
@@ -19,6 +20,6 @@
     </select>
     <input type="submit" value="Change">
 </form>
-<p th:if="*{tricks.size()==0}" th:text="There is no more thing to learn."></p>
+<p th:if="${tricks.size()}==0" th:text="'There is no more thing to learn.'"></p>
 </body>
 </html>
