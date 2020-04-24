@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Programmer Fox Club</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body th:object="${fox}">
+<ul>
+    <li><a th:href="'/?name=' + *{name}">Information</a></li>
+    <li><a th:href="'/nutritionstore?name=' + *{name}">Nutrition store</a></li>
+</ul>
+
+<form action="/learntricks" method="post" th:if="*{tricks.size()>0}">
+    <input type="hidden" name="name" th:value="*{name}">
+    <label for="trick">Tricks</label>
+    <select id="trick" name="trick">
+        <option th:each="trick: ${tricks}" th:text="${trick}" th:value="${trick}"></option>
+    </select>
+    <input type="submit" value="Change">
+</form>
+<p th:if="*{tricks.size()==0}" th:text="There is no more thing to learn."></p>
+</body>
+</html>
