@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -40,6 +41,12 @@ public class TodoController {
   @PostMapping(path = "/add")
   public String addTodo(@ModelAttribute Todo todo) {
     repository.save(todo);
+    return "redirect:/todo/list";
+  }
+
+  @GetMapping(path = "/{id}/delete")
+  public String deleteTodo(@PathVariable long id) {
+    repository.deleteById(id);
     return "redirect:/todo/list";
   }
 }
