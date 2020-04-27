@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "todo_list")
 public class Todo {
 
   @Id
@@ -15,11 +17,17 @@ public class Todo {
   private boolean urgent = false;
   private boolean done = false;
 
-  public Todo(){
+  public Todo() {
   }
 
   public Todo(String title) {
     this.title = title;
+  }
+
+  public Todo(String title, boolean done, boolean urgent) {
+    this.title = title;
+    this.done = done;
+    this.done = urgent;
   }
 
   public long getId() {

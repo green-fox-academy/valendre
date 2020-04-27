@@ -22,10 +22,22 @@ public class ConnectionwithmysqlApplication implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    repository.save(new Todo("I have to learn Object Relational Mapping"));
-    repository.save(new Todo("Start the day"));
-    repository.save(new Todo("Finish H2 workshop1"));
-    repository.save(new Todo("Finish JPA workshop2"));
-    repository.save(new Todo("Create a CRUD project"));
+    /*
+    repository.save(new Todo("daily task", false, false));
+    repository.save(new Todo("make the beds", true, true));
+    repository.save(new Todo("do the washing up", true, false));
+    repository.save(new Todo("lean the bathroom and th kitchen", true, false));
+    repository.save(new Todo("Wipe all the surfaces with a cloth", false, false));
+    repository.save(new Todo("remove the grease", true, true));
+    repository.save(new Todo("tidy up", false, false));
+    repository.save(new Todo("throw away tre rubbish"));
+    repository.save(new Todo("broom", true, false));
+    repository.save(new Todo("sweep the floors", true, false));
+    repository.save(new Todo("wash the floors"));
+    repository.save(new Todo("mop", true, true));
+    repository.save(new Todo("vacuum the carpet", true, false));
+    repository.save(new Todo("vacuum cleaner / hoover"));
+    repository.save(new Todo("dust the furniture", true, true));
+     */
   }
 }
