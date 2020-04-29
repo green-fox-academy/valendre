@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>The Reddit project</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+<a href="/submit">Submit new post</a>
+<h1>trending posts</h1>
+<main>
+    <article th:each="post : ${posts}" th:object="${post}">
+        <form th:action="@{'/vote/'}" th:method="post">
+            <input type="hidden" name="id" th:value="*{id}">
+            <input type="submit" name="vote" value="+">
+            <span th:text="*{vote}"></span>
+            <input type="submit" name="vote" value="-">
+        </form>
+        <a th:href="*{url}" th:text="*{title}"></a>
+    </article>
+</main>
+</body>
+</html>
