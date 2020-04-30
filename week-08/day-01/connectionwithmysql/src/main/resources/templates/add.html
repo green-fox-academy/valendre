@@ -9,6 +9,8 @@
 <h1>Add new todo</h1>
 <form th:action="@{/todo/add}" th:method="post">
     <input type="text" th:field="${todo.title}">
+    <input type="text" th:field="${todo.content}">
+    <input type="text" th:field="${todo.description}">
     <input type="submit">
 </form>
 </body>

@@ -1,6 +1,6 @@
 package com.greenfox.finder.controller;
 
-import service.UserService;
+import com.greenfox.finder.service.UserService;
 import com.greenfox.finder.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,6 @@ public class AppController {
     public String index(Model model) {
         model.addAttribute("new_user", new User());
         model.addAttribute("yolo", service.getAll());
-        System.out.println("ffdsf");
         return "main";
     }
 
