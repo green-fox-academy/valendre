@@ -27,7 +27,7 @@ public class MainController {
 
   @GetMapping(path = "/")
   public String renderHomepage(@RequestParam(required = false) Optional<String> name) {
-    if (!name.isPresent()) {
+    if (!name.isPresent() || !foxList.check(name.get())) {
       return "redirect:/login";
     }
     return "forward:/GO";
@@ -39,31 +39,41 @@ public class MainController {
   }
 
   @PostMapping(path = "/login")
-  public String forwardLoginSwitcher(@RequestParam String name, @RequestParam String action) {
+  public String forwardLoginSwitcher(@RequestParam(required = false) Optional<String> name,
+                                     @RequestParam String action) {
+    if (!name.isPresent()) {
+      return "redirect:/login";
+    }
     return "forward:/" + action;
   }
 
   @RequestMapping(path = "/GO", method = {RequestMethod.GET, RequestMethod.POST})
-  public String renderLogin(Model model, @RequestParam String name) {
-    if (foxList.check(name)) {
-      model.addAttribute("fox", foxList.get(name));
-      return "index";
+  public String renderLogin(Model model, @RequestParam(required = false) Optional<String> name) {
+    if (!name.isPresent() || !foxList.check(name.get())) {
+      return "redirect:/login";
     }
-    return "redirect:/login";
+    model.addAttribute("fox", foxList.get(name.get()));
+    return "index";
   }
 
   @PostMapping(path = "/Register")
-  public String renderRegister(Model model, @RequestParam String name) {
-    if (!foxList.check(name)) {
-      foxList.add(name);
+  public String renderRegister(Model model, @RequestParam(required = false) Optional<String> name) {
+    if (!name.isPresent()) {
+      return "redirect:/login";
     }
-    model.addAttribute("fox", foxList.get(name));
+    if (!foxList.check(name.get())) {
+      foxList.add(name.get());
+    }
+    model.addAttribute("fox", foxList.get(name.get()));
     return "index";
   }
 
   @GetMapping(path = "nutritionstore")
-  public String renderNutritionStore(Model model, @RequestParam String name) {
-    model.addAttribute("fox", foxList.get(name));
+  public String renderNutritionStore(Model model, @RequestParam(required = false) Optional<String> name) {
+    if (!name.isPresent()) {
+      return "redirect:/login";
+    }
+    model.addAttribute("fox", foxList.get(name.get()));
     model.addAttribute("foods", Nutrition.getFoodList());
     model.addAttribute("drinks", Nutrition.getDrinkList());
     return "nutritionstore";
@@ -84,7 +94,7 @@ public class MainController {
 
   @GetMapping(path = "/trickCenter")
   public String renderTrickCenter(@RequestParam(required = false) Optional<String> name, Model model) {
-    if (!name.isPresent()) {
+    if (!name.isPresent() || !foxList.check(name.get())) {
       return "redirect:/login";
     }
     model.addAttribute("fox", foxList.get(name.get()));
@@ -97,7 +107,7 @@ public class MainController {
 
   @PostMapping(path = "/learntricks")
   public String learnTricks(@RequestParam(required = false) Optional<String> name, @RequestParam String trick) {
-    if (!name.isPresent()) {
+    if (!name.isPresent() || !foxList.check(name.get())) {
       return "redirect:/login";
     }
     if (foxList.check(name.get())) {
