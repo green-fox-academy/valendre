@@ -56,11 +56,6 @@ public class MainController {
     return "redirect:/";
   }
 
-  @GetMapping(path = "/register")
-  public String renderRegisterForm() {
-    return "register";
-  }
-
   @PostMapping(path = "/loginform")
   public String switchLogin(@RequestParam String name, @RequestParam String logintype) {
     if (logintype.equals("login")){
