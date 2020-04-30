@@ -10,14 +10,12 @@
     <h1>Submit new post</h1>
     <form th:object="${newpost}" th:action="@{/submit}" th:method="post">
         <label>Title:</label><br>
-        <input type="text" th:field="*{title}"><br>
+        <input type="text" th:field="*{title}" required><br>
         <label>url:</label><br>
-        <input type="text" th:field="*{url}"><br>
+        <input type="url" th:field="*{url}" required><br>
         <input type="hidden" name="user_id" th:value="${user_id}">
         <input type="submit">
     </form>
-
 </main>
-
 </body>
 </html>
