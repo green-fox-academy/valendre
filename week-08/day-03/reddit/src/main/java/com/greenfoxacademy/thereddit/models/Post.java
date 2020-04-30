@@ -1,16 +1,19 @@
 package com.greenfoxacademy.thereddit.models;
 
 import java.util.Date;
+import java.util.Optional;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "post")
 @SequenceGenerator(name = "seq", initialValue = 2, allocationSize = 50)
 public class Post {
 
@@ -24,12 +27,18 @@ public class Post {
   @Temporal(TemporalType.DATE)
   private Date date;
 
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn
+  private User user;
+
   public Post() {
+    this.date = new Date();
   }
 
   public Post(String title, String url) {
     this.title = title;
     this.url = url;
+    this.date = new Date();
   }
 
   public long getId() {
@@ -70,5 +79,20 @@ public class Post {
 
   public void setDate(Date date) {
     this.date = date;
+  }
+
+  public String getName() {
+    if (this.user!=null) {
+      return this.user.getName();
+    }
+    return null;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 }

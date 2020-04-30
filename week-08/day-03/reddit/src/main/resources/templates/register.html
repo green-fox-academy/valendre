@@ -7,14 +7,12 @@
 </head>
 <body>
 <main>
-    <h1>Submit new post</h1>
-    <form th:object="${newpost}" th:action="@{/submit}" th:method="post">
-        <label>Title:</label><br>
-        <input type="text" th:field="*{title}"><br>
-        <label>url:</label><br>
-        <input type="text" th:field="*{url}"><br>
-        <input type="hidden" name="user_id" th:value="${user_id}">
-        <input type="submit">
+    <h1>Register</h1>
+    <form th:action="@{/register}" th:method="post">
+        <label>Name:</label><br>
+        <input type="text" name="name"><br>
+        <input type="submit" value="login">
+        <input type="submit" value="register">
     </form>
 
 </main>

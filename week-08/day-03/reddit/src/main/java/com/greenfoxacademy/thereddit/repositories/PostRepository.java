@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long> {
 
-  @Query(value = "SELECT * FROM post ORDER BY vote DESC LIMIT 10 OFFSET :skipper", nativeQuery = true)
+  @Query(value = "SELECT * FROM post LEFT JOIN user ON post.user_id = user.id ORDER BY post.vote DESC LIMIT 10 OFFSET :skipper", nativeQuery = true)
   List<Post> findTenPosts(int skipper);
 
+  int countPostByIdIsNotNull();
 }

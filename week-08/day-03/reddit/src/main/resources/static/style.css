@@ -1,0 +1,57 @@
+body {
+    font-family: Arial;
+    margin: 0;
+}
+
+header {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+}
+
+header, footer {
+    background-color: dimgray;
+    margin: 0;
+    padding: 0.5em 10%;
+    position: fixed;
+    width: 80%;
+}
+
+header a, footer a {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    margin-right: 1em;
+}
+
+main {
+    width: 80%;
+    margin: 2em auto;
+    padding-top: 1em;
+}
+
+article {
+    width: 100%;
+    padding: .5em 0;
+    border-bottom: 2px solid lightgray;
+}
+
+article form {
+    display: inline-block;
+    width: 8em;
+}
+
+article form input, article form span {
+    outline: none;
+    border: none;
+    background-color: inherit;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: dimgray;
+}
+
+article a {
+    display: inline-block;
+}

@@ -3,21 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>The Reddit project</title>
-    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-<a href="/submit">Submit new post</a>
-<h1>trending posts</h1>
+<header>
+    <form th:if="${user==null}" th:action="@{/loginform}" th:method="post">
+        <input type="text" name="name" placeholder="username" required>
+        <input type="submit" name="logintype" value="login">
+        <input type="submit" name="logintype" value="register">
+    </form>
+    <form th:if="${user!=null}" th:action="@{/logout}" th:method="post">
+        <a href="/submit">Submit new post</a>
+        <span th:text="'Hello, ' + ${user.name} + '!'"></span>
+        <input type="hidden" name="id" th:value="${user.id}">
+        <input type="submit" value="logout">
+    </form>
+</header>
 <main>
-    <article th:each="post : ${posts}" th:object="${post}">
+    <h1>trending posts</h1>
+    <article th:each="post : ${posts}">
         <form th:action="@{'/vote/'}" th:method="post">
-            <input type="hidden" name="id" th:value="*{id}">
+            <input type="hidden" name="id" th:value="${post.id}">
             <input type="submit" name="vote" value="+">
-            <span th:text="*{vote}"></span>
+            <span th:text="${post.vote}"></span>
             <input type="submit" name="vote" value="-">
         </form>
-        <a th:href="*{url}" th:text="*{title}"></a>
+        <a th:href="${post.url}" th:text="${post.title}"></a>
+        <span th:text="${post.date}"></span>
+        <span th:text="${post.name}"></span>
     </article>
 </main>
+<footer>
+    <a th:each="page : ${pages}" th:href="@{'/page/' + ${page} + '/'}" th:text="${page}"></a>
+</footer>
 </body>
 </html>
