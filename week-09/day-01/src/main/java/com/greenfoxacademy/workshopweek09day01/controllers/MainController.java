@@ -1,6 +1,7 @@
 package com.greenfoxacademy.workshopweek09day01.controllers;
 
 import com.greenfoxacademy.workshopweek09day01.domain.AppendA;
+import com.greenfoxacademy.workshopweek09day01.domain.ArrayHandling;
 import com.greenfoxacademy.workshopweek09day01.domain.DoUntil;
 import com.greenfoxacademy.workshopweek09day01.domain.Doubling;
 import com.greenfoxacademy.workshopweek09day01.domain.Error;
@@ -65,5 +66,18 @@ public class MainController {
       return ResponseEntity.ok().body(new DoUntil(operator.get(), until.getUntil()));
     }
     return ResponseEntity.status(501).body(new Error("Bad request"));
+  }
+
+  @PostMapping("/arrays")
+  @ResponseBody
+  public ResponseEntity<?> handlingArray(@RequestBody Optional<ArrayHandling> arrayHandling) {
+    if (arrayHandling.isPresent()) {
+      if (arrayHandling.get().getWhat().equals("sum") || arrayHandling.get().getWhat().equals("multiply")) {
+        return ResponseEntity.ok().body(arrayHandling.get().getResult());
+      } else if (arrayHandling.get().getWhat().equals("double")) {
+        return ResponseEntity.ok().body(arrayHandling.get().getResultArray());
+      }
+    }
+    return ResponseEntity.ok().body(new Error("Please provide what to do with the numbers!"));
   }
 }
