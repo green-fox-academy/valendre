@@ -21,16 +21,16 @@
 </header>
 <main>
     <h1>trending posts</h1>
-    <article th:each="post : ${posts}">
+    <article th:each="post : ${posts}" th:object="${post}">
         <form th:action="@{'/vote/'}" th:method="post">
-            <input type="hidden" name="id" th:value="${post.id}">
+            <input type="hidden" name="id" th:value="*{id}">
             <input type="submit" name="vote" value="+">
-            <span th:text="${post.vote}"></span>
+            <span th:text="*{vote}"></span>
             <input type="submit" name="vote" value="-">
         </form>
-        <a th:href="${post.url}" th:text="${post.title}"></a>
-        <span th:text="${post.date}"></span>
-        <span th:text="${post.name}==null ? 'unidentified user' : ${post.name}"></span>
+        <a th:href="*{url}" th:text="*{title}"></a>
+        <span th:text="*{date}"></span>
+        <span th:text="*{name}==null ? 'unidentified user' : *{name}"></span>
     </article>
 </main>
 <footer>
