@@ -1,25 +1,44 @@
 package com.greenfoxacademy.workshopweek09day01.controllers;
 
-import com.greenfoxacademy.workshopweek09day01.domain.AppendA;
-import com.greenfoxacademy.workshopweek09day01.domain.ArrayHandling;
-import com.greenfoxacademy.workshopweek09day01.domain.DoUntil;
-import com.greenfoxacademy.workshopweek09day01.domain.Doubling;
-import com.greenfoxacademy.workshopweek09day01.domain.Error;
-import com.greenfoxacademy.workshopweek09day01.domain.Greeter;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.greenfoxacademy.workshopweek09day01.domain.Log;
+import com.greenfoxacademy.workshopweek09day01.domain.LogResponse;
 import com.greenfoxacademy.workshopweek09day01.domain.Until;
+import com.greenfoxacademy.workshopweek09day01.services.ArrayService;
+import com.greenfoxacademy.workshopweek09day01.services.ExerciseService;
+import com.greenfoxacademy.workshopweek09day01.services.LogService;
+import com.greenfoxacademy.workshopweek09day01.services.SithService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
+  private ExerciseService exerciseService;
+  private ArrayService arrayService;
+  private LogService logService;
+  private SithService sithService;
+
+  @Autowired
+  public MainController(ExerciseService exerciseService, ArrayService arrayService,
+                        LogService logService, SithService sithService) {
+    this.exerciseService = exerciseService;
+    this.arrayService = arrayService;
+    this.logService = logService;
+    this.sithService = sithService;
+  }
+
   @GetMapping("/")
   public String renderIndex() {
     return "index";
@@ -28,56 +47,48 @@ public class MainController {
   @GetMapping("/doubling")
   @ResponseBody
   public ResponseEntity<?> doubling(@RequestParam Optional<Integer> input) {
-    if (input.isPresent()) {
-      Doubling doubling = new Doubling(input.get());
-      return ResponseEntity.ok().body(doubling);
-    } else {
-      return ResponseEntity.ok().body(new Error("Please provide an input!"));
-    }
+    logService.addLog(new Log("/doubling", "?input=" + input));
+    return exerciseService.doubling(input);
   }
 
   @GetMapping("/greeter")
   @ResponseBody
   public ResponseEntity<?> greet(@RequestParam Optional<String> name, @RequestParam Optional<String> title) {
-    if (name.isPresent()) {
-      if (title.isPresent()) {
-        return ResponseEntity.ok().body(new Greeter(name.get(), title.get()));
-      } else {
-        return ResponseEntity.status(400).body(new Error("Please provide a title!"));
-      }
-    }
-    return ResponseEntity.status(400).body(new Error("Please provide a name and a title!"));
+    logService.addLog(new Log("/greeter", "?name=" + name + "&title=" + title));
+    return exerciseService.greet(name, title);
   }
 
   @GetMapping("/appenda/{input}")
   @ResponseBody
   public ResponseEntity<?> appendA(@PathVariable Optional<String> input) {
-    if (input.isPresent()) {
-      return ResponseEntity.ok().body(new AppendA(input.get()));
-    } else {
-      return ResponseEntity.status(404).body(new Error("Not Found"));
-    }
+    logService.addLog(new Log("/appenda", "/appenda/" + input));
+    return exerciseService.appendA(input);
   }
 
   @PostMapping("/dountil/{operator}")
   @ResponseBody
-  public ResponseEntity<?> doUntil(@RequestBody Until until, @PathVariable Optional<String> operator) {
-    if (operator.isPresent() ) {
-      return ResponseEntity.ok().body(new DoUntil(operator.get(), until.getUntil()));
-    }
-    return ResponseEntity.status(501).body(new Error("Bad request"));
+  public ResponseEntity<?> doUntil(@RequestBody String allParams, @PathVariable Optional<String> operator) throws JsonProcessingException {
+    //logService.addLog(new Log("/dountil", "/dountil/" + operator+ ", {\"unłtil\":"+until+"}"));
+    return exerciseService.doUntil(allParams, operator);
   }
 
   @PostMapping("/arrays")
   @ResponseBody
-  public ResponseEntity<?> handlingArray(@RequestBody Optional<ArrayHandling> arrayHandling) {
-    if (arrayHandling.isPresent()) {
-      if (arrayHandling.get().getWhat().equals("sum") || arrayHandling.get().getWhat().equals("multiply")) {
-        return ResponseEntity.ok().body(arrayHandling.get().getResult());
-      } else if (arrayHandling.get().getWhat().equals("double")) {
-        return ResponseEntity.ok().body(arrayHandling.get().getResultArray());
-      }
-    }
-    return ResponseEntity.ok().body(new Error("Please provide what to do with the numbers!"));
+  public ResponseEntity<?> handlingArray(@RequestBody String allParams) {
+    logService.addLog(new Log("/arrays", allParams));
+    return arrayService.handlingArray(allParams);
+  }
+
+  @GetMapping("/log")
+  @ResponseBody
+  public ResponseEntity<?> logResponse() {
+    return ResponseEntity.ok().body(new LogResponse(logService.getAllLogs()));
+  }
+
+  @PostMapping("/sith")
+  @ResponseBody
+  public ResponseEntity<?> responseSith(@RequestBody String allParams) {
+    logService.addLog(new Log("/sith", allParams));
+    return sithService.responseSith(allParams);
   }
 }
