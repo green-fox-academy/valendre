@@ -12,29 +12,37 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   public UserServiceImpl(UserRepository userRepository) {
-    this.userRepository=userRepository;
+    this.userRepository = userRepository;
+  }
+
+  @Override
+  public void loginForm(String name, String logintype) {
+    if (logintype.equals("login")) {
+      this.login(name);
+    } else if (logintype.equals("register")) {
+      this.register(name);
+    }
   }
 
   @Override
   public void register(String name) {
-    User user = new User();
-    user.setName(name);
-    user.setCurrent(true);
-    userRepository.save(user);
+    if (!this.checkExistingUser(name)) {
+      User user = new User();
+      user.setName(name);
+      user.setCurrent(true);
+      userRepository.save(user)
+    }
   }
 
   @Override
-  public boolean check(String name){
-    if (userRepository.countUserByNameEquals(name)>0) {
-      return true;
-    }
-    return false;
+  public boolean checkExistingUser(String name) {
+    return userRepository.countUserByNameEquals(name) > 0;
   }
 
   @Override
   public void login(String name) {
-    if (this.check(name)) {
-      User user =  userRepository.getUserByName(name);
+    if (this.checkExistingUser(name)) {
+      User user = userRepository.getUserByName(name);
       user.setCurrent(true);
       userRepository.save(user);
     }

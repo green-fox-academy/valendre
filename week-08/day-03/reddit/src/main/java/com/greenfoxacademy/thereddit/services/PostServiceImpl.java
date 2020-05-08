@@ -32,8 +32,7 @@ public class PostServiceImpl implements PostService {
   }
 
   @Override
-  public void addPost(String title, String url, long user_id) {
-    Post post = new Post(title, url);
+  public void addPost(Post post, long user_id) {
     Optional<User> optionalUser = userRepository.findById(user_id);
     if (optionalUser.isPresent()) {
       User user = optionalUser.get();
@@ -43,7 +42,6 @@ public class PostServiceImpl implements PostService {
       user.setPosts(posts);
       userRepository.save(user);
     }
-    postRepository.save(post);
   }
 
   @Override

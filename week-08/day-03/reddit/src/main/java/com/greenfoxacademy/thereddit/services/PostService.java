@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public interface PostService {
 
   public List<Post> listTopTen(int page);
-  public void addPost(String title, String url, long user_id);
+  public void addPost(Post post, long user_id);
   public void votePost(long id, String vote);
   public List<Integer> listPagination();
   public int countPages();

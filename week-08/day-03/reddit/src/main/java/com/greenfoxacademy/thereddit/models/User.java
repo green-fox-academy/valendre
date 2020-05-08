@@ -18,7 +18,7 @@ public class User {
   private String name;
   private boolean current;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
   private List<Post> posts = new ArrayList<>();
 
   public long getId() {
@@ -52,6 +52,4 @@ public class User {
   public void setCurrent(boolean current) {
     this.current = current;
   }
-
-
 }
